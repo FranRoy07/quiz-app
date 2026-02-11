@@ -1,0 +1,97 @@
+/*Resetear espacios por defecto del navegador*/
+*{
+    margin: 0;
+    padding:0;
+    box-sizing:border-box; /* Para que el tamaño de los elementos se mida por su borde, no por su contenido */
+}
+
+/*Variables*/ /*Se crean usando doble guión desde la raíz <root> (ej: --mi-variable: valor;), para colores y/o tamaños*/
+:root{
+    --background-color: #172128;
+    --question-color: #00ff00c5 ;
+    --option-background-color: #1d2932;
+    --option-color: #e4e4e4;
+    --option-color-hover: #000;
+
+    --question-size: 2rem; /* 1rem = 16px, 2rem = 32px */
+    --option-size: 1.8rem;
+}
+
+/*Fuente local (letra)*/
+@font-face{
+    font-family: 'Departure Mono';
+    src: url(./assets/fonts/DepartureMono-Regular.otf);
+    /*Acá lo que se hizo fue definir una fuente personalizada para el proyecto*/
+}
+
+body{
+    background-color: var(--background-color); /* Se llama a la variable usando var(--nombre-de-la-variable) */
+    font-family: 'Departure Mono';    
+}
+
+.question{
+    color: var(--question-color);
+    font-size: var(--question-size);
+    margin: 8px 8px 32px;
+}
+
+.option{
+    background-color: var(--option-background-color);
+    color: var(--option-color);
+    margin: 8px;
+    padding: 4px;
+    border-radius: 4px;
+    font-size: var(--option-size);
+    cursor: pointer; /* Cambia el cursor a una mano cuando se pasa por encima de las opciones */
+    &:hover{ /*Es como poner <option:hover> aparte*/
+        background-color: var(--question-color);
+        color: var(--option-color-hover);
+    }
+
+
+}
+
+/*El after y before se refiere a si va antes o dsps del elemento al que se aplica el estilo*/
+.correct::after{
+    content: '✅'; /*Agregar símbolos con windows + . (punto)*/
+    margin-left: 16px;
+}
+
+.incorrect::after{
+    content: '❌';
+    margin-left: 16px;
+}
+
+@keyframes blinking{
+    0% {opacity : 1;}
+    50% {opacity : 0;}
+    100% {opacity : 1;}
+}
+
+.correct, .incorrect{
+    animation: blinking 0.3s ease-in-out 1;
+}
+
+.total{
+    color: var(--option-color);
+    text-align: center;
+    margin: 8px 8px 32px;
+    font-size: var(--option-size) ;
+}
+
+.button-container{
+    text-align: center;
+}
+
+#restartBtn{
+    background-color: var(--question-color);
+    padding: 4px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: var(--question-size);
+    &:hover{
+        border: 1px solid var(--question-color);
+        background-color: var(--background-color);
+        color: var(--question-color);
+    }
+}
